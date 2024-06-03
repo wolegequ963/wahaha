@@ -8,21 +8,24 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #e0f2f7; /* 浅蓝色背景 */
+      background-color: #e0f2f7; 
       font-family: 'Microsoft YaHei', sans-serif;
-      overflow: hidden; 
+      overflow: hidden;
     }
 
     #logo {
+      position: absolute; 
       width: 200px;
       height: auto;
-      margin: 20px auto; 
+      left: 50%;
+      transform: translateX(-50%);
+      top: 20px;
     }
 
     #product {
+      position: absolute;
       width: 300px; 
       height: auto;
-      position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
@@ -34,28 +37,33 @@
       height: auto;
     }
 
-    /* 针对不同屏幕高度进行适配 */
-    @media screen and (height: 1008px) { 
-      /*  针对 1008px 高度，可以在这里调整 #product 的位置 */
-      #product { 
-        top: 45%; /* 例如，将产品合集图向上移动一些 */
-      }
-    }
-
-    @media screen and (height: 1030px) {
-      /*  针对 1030px 高度，可以在这里调整 #product 的位置 */
-      #product { 
-        top: 46%; /* 例如，将产品合集图向上移动一些 */
-      }
-    }
-	
-	#catchMe {
+    #catchMe {
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
       font-size: 30px;
-      color: #f44336; /*  醒目的红色 */
+      color: #f44336; 
+    }
+
+    /* 针对不同屏幕尺寸进行适配 */
+    @media screen and (max-width: 640px) {
+      #logo {
+        width: 150px; 
+        top: 10px;
+      }
+
+      #product {
+        width: 200px; 
+      }
+
+      .drink {
+        width: 50px; 
+      }
+
+      #catchMe {
+        font-size: 20px; 
+      }
     }
   </style>
 </head>
@@ -92,9 +100,9 @@
       drinkImg.src = imageUrl;
       drinkImg.className = 'drink';
 
-      // 设置随机位置
-      drinkImg.style.left = getRandomNumber(0, pageWidth - 80) + 'px'; // 80 是图片宽度，防止图片超出屏幕
-      drinkImg.style.top = getRandomNumber(0, pageHeight - 80) + 'px'; // 80 是图片高度
+      // 设置随机位置 (根据屏幕宽度调整)
+      drinkImg.style.left = getRandomNumber(0, pageWidth - drinkImg.offsetWidth) + 'px'; 
+      drinkImg.style.top = getRandomNumber(0, pageHeight - drinkImg.offsetHeight) + 'px'; 
 
       // 设置随机速度和角度
       const speed = getRandomNumber(1, 5); // 速度范围：1px - 5px
