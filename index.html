@@ -127,27 +127,35 @@
       });
     }
 
-    // 创建一个函数，用来显示随机广告语
-    function showRandomSlogan() {
-      const randomIndex = Math.floor(Math.random() * slogans.length);
-      const slogan = slogans[randomIndex];
+	// 创建一个函数，用来显示随机广告语
+	function showRandomSlogan() {
+	  const randomIndex = Math.floor(Math.random() * slogans.length);
+	  const slogan = slogans[randomIndex];
 
-      const sloganElement = document.createElement('div');
-      sloganElement.textContent = slogan;
-      sloganElement.style.position = 'absolute';
-      sloganElement.style.left = '50%';
-      sloganElement.style.top = '50%';
-      sloganElement.style.transform = 'translate(-50%, -50%)'; // 居中显示
-      sloganElement.style.fontSize = '24px';
-      sloganElement.style.color = 'red';  
+	  const sloganElement = document.createElement('div');
+	  sloganElement.textContent = slogan;
+	  sloganElement.style.position = 'absolute';
+	  sloganElement.style.left = '50%';
+	  sloganElement.style.top = '20%';
+	  sloganElement.style.transform = 'translate(-50%, -50%)'; // 居中显示
+	  sloganElement.style.fontSize = '24px';
+	  sloganElement.style.color = 'red';
+	  sloganElement.style.opacity = '1';  // 初始完全不透明
+	  sloganElement.style.transition = 'opacity 1s ease-in-out'; // 设置过渡效果
 
-      document.body.appendChild(sloganElement);
+	  document.body.appendChild(sloganElement);
 
-      // 设置广告语消失的定时器
-      setTimeout(() => {
-        sloganElement.remove();
-      }, getRandomNumber(1000, 3000)); // 1~3 秒后消失
-    }
+	  // 设置广告语消失的定时器
+	  setTimeout(() => {
+		sloganElement.style.opacity = '0'; // 逐渐变为完全透明
+		// 广告语完全透明后，从页面中移除
+		setTimeout(() => {
+		  sloganElement.remove();
+		}, 1000); // 1 秒后移除
+
+	  }, getRandomNumber(1000, 3000)); // 1~3 秒后开始消失
+	}
+
 
     // 每秒钟创建一个新的饮料图片
     setInterval(() => {
